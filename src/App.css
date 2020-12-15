@@ -7,6 +7,11 @@
   width: 720px;
 }
 
+.App-example {
+  height: 800px;
+  width: 500px;
+}
+
 
 .App-header {
   background-color: #ffffff;
