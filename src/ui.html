@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="NEditor.css">
+		<script src="NEditor.js"></script>
+		<script>
+			window.addEventListener("load",function(e){
+				var n4 = new NEditor.Node("Root Replica Node");
+				var n4i1 = n4.addInput("Node Name");
+				var n4i2 = n4.addInput("Root Address");
+				n4.setPosition(700,50);
+
+
+				var n3 = new NEditor.Node("Key Group 1");
+				var n3i1 = n3.addInput("Name");
+				var n3o1 = n3.addOutput("Mutable");
+				var n3o1 = n3.addOutput("Expire");
+				n3.setPosition(300,50);
+				n3.setWidth(200);
+
+				var n5 = new NEditor.Node("Replica Node");
+				var n5i1 = n5.addInput("Node Name");
+				var n5o1 = n5.addInput("Expire");
+				n5.setPosition(700,160);
+
+				n3o1.connectTo(n5i1);
+				n3o1.connectTo(n4i2);
+
+
+				var n6 = new NEditor.Node("Root Replica Node");
+				var n6i1 = n6.addInput("Node Name:");
+				var n6i2 = n6.addInput("Root Address:");
+				n6.setPosition(700,250);
+
+				var n2 = new NEditor.Node("Key Group 2");
+				var n2i1 = n2.addInput("Name:");
+				var n2o1 = n2.addOutput("Mutable:");
+				var n2o1 = n2.addOutput("Expire:");
+				n2.setPosition(300,300);
+				n2.setWidth(200);
+
+				var n7 = new NEditor.Node("Replica Node:");
+				var n7i1 = n7.addInput("Node Name:");
+				var n7o1 = n7.addInput("Expire:");
+				n7.setPosition(700,370);
+
+				n2o1.connectTo(n6i1);
+				n2o1.connectTo(n7i1);
+
+				var n1 = new NEditor.Node("Client/Data Source");
+				var n1o1 = n1.addOutput("Input Data");
+				n1.setPosition(50,200);
+
+				n1o1.connectTo(n2i1);
+				n1o1.connectTo(n3i1);
+
+			});
+		</script>
+	</head>
+<body>
+
+<svg id="connsvg"></svg>
+
+<p style="color:#a0a0a0; bottom:1px; position:absolute">
+	- TODO:<br>
+	- create side bar to drag new template elements <br>
+	- use JS implement drag and position identification <br>
+	- convert conf to json file
+
+	<br><br>&copy; 2020 Mercury;
+</p>
+
+
+</body>
+</html>
