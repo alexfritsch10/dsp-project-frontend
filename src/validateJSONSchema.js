@@ -72,6 +72,13 @@ export function validateJSONSchema(text) {
                     console.log('In here 10');
                     return generateResponse("KeyGroup name should be a string");
                 }
+                if(! /^[a-zA-Z0-9]+$/.test(keyGroupValue.Name)){
+                    return generateResponse("Keygroup name does not match ^[a-zA-Z0-9]+$");
+                }
+                if(value.Properties.KeyGroups.filter(x => x.Name === keyGroupValue.Name).length > 1) {
+                    return generateResponse("KeyGroup names can only be given once");
+                }
+
                 if(typeof keyGroupValue.Mutable !== 'boolean') {
                     console.log('In here 11');
                     return generateResponse("KeyGroup attribute mutable should be a boolean");
@@ -88,6 +95,12 @@ export function validateJSONSchema(text) {
                 for (const repValue of keyGroupValue.Replicas) {
                     if(typeof repValue.Name !== 'string') {
                         return generateResponse("KeyGroup Replica name should be a string");
+                    }
+                    if(!value.Properties.Nodes.NodeNames.includes(repValue.Name)) {
+                        return generateResponse("KeyGroup Replica name should be in the Nodes List");
+                    }
+                    if(keyGroupValue.Replicas.filter(x => x.Name === repValue.Name).length > 1) {
+                        return generateResponse("KeyGroup Replica can only appear once in the list");
                     }
                     if(!Number.isInteger(repValue.Expiry)) {
                         console.log('In here 14');
