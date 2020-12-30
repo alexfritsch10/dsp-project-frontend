@@ -7,8 +7,7 @@ NEditor.offsetX = 0;        //OffsetX for dragging nodes
 NEditor.offsetY = 0;        //OffsetY for dragging nodes
 NEditor.svg = null;
 
-NEditor.pathColor = "#999999";
-NEditor.pathColorA = "#86d530";
+NEditor.pathColorA = "#8FBC8F";
 NEditor.pathWidth = 2;
 NEditor.pathDashArray = "20,5,5,5,5,5";
 
@@ -329,6 +328,48 @@ NEditor.Node.prototype.addOutput = function(name){
 	return o;
 }
 
+NEditor.Node.prototype.addChild = function(type, text, id){
+	this.label = document.createElement(type);
+	var t = document.createTextNode(text);
+	this.label.appendChild(t);
+	document.body.appendChild(this.eRoot);
+	this.eRoot.appendChild(this.label);
+	this.label = this.eRoot;
+	this.label.id = id;
+	// n1o1= document.getElementsByClassName("Output Active")
+	// this.label.addEventListener("click",replicateKeyGroupSet ("Key Group 3", 300, 550, 200, 950, 250, 700, 600),false);
+}
+
+function replicateKeyGroupSet(keyGroupId, kgx, kgy, rnx, rny, rn1x, rn1y, rn2x, rn2y, clientNode){
+	var n4 = new NEditor.Node("Root Replica Node");
+	var n4i1 = n4.addInput("Node Name: \"nodeA\"");
+	var n4i2 = n4.addInput("Root Address:\"172.26.1.1:9001\"");
+	n4.setPosition(rnx,rny);
+
+	var n3 = new NEditor.Node(keyGroupId);
+	var n3i1 = n3.addInput("Name (configurable)");
+	var n3o1 = n3.addOutput("Mutable (configurable)");
+	var n3o1 = n3.addOutput("Expire (configurable)");
+	n3.setPosition(kgx,kgy);
+	n3.setWidth(250);
+
+	var n5 = new NEditor.Node("Replica Node 1");
+	var n5i1 = n5.addInput("Node Name: \"nodeB\"");
+	var n5o1 = n5.addInput("Expire (this should be configurable)");
+	n5.setPosition(rn1x,rn1y);
+
+	var n2 = new NEditor.Node("Replica Node 3");
+	var n2i1 = n2.addInput("Node Name: \"nodeC\"");
+	var n2o1 = n2.addInput("Expire (this should be configurable)");
+	n2.setPosition(rn2x,rn2y);
+
+
+	n3o1.connectTo(n5i1);
+	n3o1.connectTo(n4i1)
+	n3o1.connectTo(n2i1);
+
+	clientNode.connectTo(n3i1);
+}
 NEditor.Node.prototype.getInputPos = function(i){ return NEditor.getConnPos(this.Inputs[i].dot); }
 NEditor.Node.prototype.getOutputPos = function(i){ return NEditor.getConnPos(this.Outputs[i].dot); }
 
