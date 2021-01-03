@@ -9,39 +9,28 @@ export function validateJSONSchema(text) {
     
     // check if object was passed
     if(Object.keys(obj).length === 0 || obj.constructor !== Object) {
-        console.log('In here');
         return generateResponse("Input File is no JSON Object or Empty");
     }
 
 
     if(typeof obj.FReDTemplateFormatVersion !== 'string') {
-        console.log('In here 2');
-        console.log(typeof obj.FReDTemplateFormatVersion);
         return generateResponse("Template Version has to be a String");
     }
 
     for (const value of obj.Resources) {
-        console.log(value.Name);
         if(typeof value.Name !== 'string') {
-            console.log(typeof value.Name);
-            console.log('In here 3');
             return generateResponse("Name of Resource has to be a String");
         }
         if(value.Type === "FReD") {
-            console.log('Of type fred');
             if(typeof value.Properties !== 'object') {
-                console.log(typeof value.Properties);
-                console.log('In here 4');
                 return generateResponse("Propeties Attribute of Resource should be an Object");
             }
 
             if(typeof value.Properties.Nodes !== 'object') {
-                console.log('In here 5');
                 return generateResponse("Nodes Attribute of Propeties should be an Object");
             }
 
             if(typeof value.Properties.Nodes.NodeNames !== 'object') {
-                console.log('In here 6');
                 return generateResponse("NodeNames Attribute of Nodes should be an Object");
             }
 
@@ -49,10 +38,12 @@ export function validateJSONSchema(text) {
                 if(typeof nodeName != 'string') {
                     return generateResponse("NodeNames must be string");
                 }
+                if(value.Properties.Nodes.NodeNames.filter(x => x === nodeName).length > 1) {
+                    return generateResponse("NodeNames can only appear once in the NodeNames List");
+                }
             }
 
             if(typeof value.Properties.Clients !== 'object') {
-                console.log('In here 7');
                 return generateResponse("Clients Attribute of Properties should be an Object");
             }
 
@@ -63,13 +54,11 @@ export function validateJSONSchema(text) {
             }
 
             if(typeof value.Properties.KeyGroups !== 'object') {
-                console.log('In here 9');
                 return generateResponse("KeyGroups Attribute of Properties should be an Object");
             }
 
             for (const keyGroupValue of value.Properties.KeyGroups) {
                 if(typeof keyGroupValue.Name !== 'string') {
-                    console.log('In here 10');
                     return generateResponse("KeyGroup name should be a string");
                 }
                 if(! /^[a-zA-Z0-9]+$/.test(keyGroupValue.Name)){
@@ -80,15 +69,12 @@ export function validateJSONSchema(text) {
                 }
 
                 if(typeof keyGroupValue.Mutable !== 'boolean') {
-                    console.log('In here 11');
                     return generateResponse("KeyGroup attribute mutable should be a boolean");
                 }
                 if(!Number.isInteger(keyGroupValue.Expiry)) {
-                    console.log('In here 12');
                     return generateResponse("KeyGroup attribute expiry should be a integer");
                 }
                 if(typeof keyGroupValue.Replicas !== 'object') {
-                    console.log('In here 13');
                     return generateResponse("KeyGroup attribute Replicas should be a object");
                 }
 
@@ -103,14 +89,12 @@ export function validateJSONSchema(text) {
                         return generateResponse("KeyGroup Replica can only appear once in the list");
                     }
                     if(!Number.isInteger(repValue.Expiry)) {
-                        console.log('In here 14');
                         return generateResponse("KeyGroup Replica attribute expiry should be a integer");
                     }
                     
                 }
 
                 if(typeof keyGroupValue.Triggers !== 'object') {
-                    console.log('In here 15');
                     return generateResponse("KeyGroup attribute Replicas should be a object");
                 }
 
@@ -119,7 +103,6 @@ export function validateJSONSchema(text) {
                         return generateResponse("KeyGroup Replica name should be a string");
                     }
                     if(!Number.isInteger(triValue.ReceiverAddress)) {
-                        console.log('In here 16');
                         return generateResponse("KeyGroup Trigger attribute expiry should be a integer");
                     }
                     
@@ -142,7 +125,6 @@ function generateResponse(message, valid = false) {
         message: message
     };
 
-    console.log(params);
 
     return (params);
 }
