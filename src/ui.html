@@ -1,46 +1,50 @@
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="NEditor.css">
-		<script src="NEditor.js"></script>
-		<script>
-			window.addEventListener("load",function(e){
+
+<head>
+	<link rel="stylesheet" type="text/css" href="NEditor.css">
+	<script src="NEditor.js"></script>
+	<script>
+		window.addEventListener("load", function (e) {
 
 
-				var n1 = new NEditor.Node("Client/Data Source");
-				var n1o1 = n1.addOutput("Input Data");
-				n1.addChild("BUTTON","add keyGroup","replicateKeyGroupButton");
-				n1.setPosition(50,200);
+			var n1 = new NEditor.Node("Client/Data Source");
+			var n1o1 = n1.addOutput("Input Data");
+			n1.addChild("BUTTON", "add keyGroup", "replicateKeyGroupButton");
+			n1.setPosition(50, 200);
 
-				replicateKeyGroupSet ("Key Group 1", 300, 50, 700, 50, 700, 150, 700, 250, n1o1)
-				replicateKeyGroupSet ("Key Group 2", 300, 450, 700, 370, 700, 470, 700, 570, n1o1)
+			op_replicaKey("Key Group 1", 300, 50, 700, 50, 700, 150, 700, 250, n1o1)
+			op_replicaKey("Key Group 2", 300, 450, 700, 370, 700, 470, 700, 570, n1o1)
 
-				document.getElementById("replicateKeyGroupButton").addEventListener("click", function(){
-					var el = document.getElementById('replicateKeyGroupButton');
-					if(el){
-						el.addEventListener("click", replicateKeyGroupSet ("Key Group 3", 300, 800, 700, 690, 700, 790, 700, 890, n1o1), false);
-					}
-					else {
-						alert ("There are some error on finding client node, please try again!")
-					}
-				})
-			});
+			document.getElementById("replicateKeyGroupButton").addEventListener("click", function () {
+				var el = document.getElementById('replicateKeyGroupButton');
+				if (el) {
+					el.addEventListener("click", op_replicaKey("Key Group 3", 300, 800, 700, 690, 700, 790, 700, 890, n1o1), false);
+				}
+				else {
+					alert("There are some error on finding client node, please try again!")
+				}
+			})
+		});
 
-		</script>
-	</head>
+
+	</script>
+</head>
+
 <body>
 
-<svg id="connsvg"></svg>
+	<svg id="connsvg"></svg>
 
-<p style="color:#a0a0a0; bottom:1px; position:absolute">
-	- TODO:<br>
-	- enable create new key group sets by click on icon - Xin <br>
-	- set default values - Xin <br>
-	- implement configurable fields - Amit <br>
-	- convert GUI to json file - Amit <br>
+	<p style="color:#a0a0a0; bottom:1px; position:absolute">
+		- TODO:<br>
+		- enable create new key group sets by click on icon - Xin <br>
+		- set default values - Xin <br>
+		- implement configurable fields - Amit <br>
+		- convert GUI to json file - Amit <br>
 
-	<br><br>&copy; 2020 Mercury;
-</p>
+		<br><br>&copy; 2020 Mercury;
+	</p>
 
 
 </body>
+
 </html>

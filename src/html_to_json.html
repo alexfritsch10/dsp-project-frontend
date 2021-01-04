@@ -1,0 +1,7 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    jQuery.get('ui.html?json=true', function (msg) {
+        entirePage = JSON.parse(msg);
+        console.log(entirePage)
+    })
+</script>
