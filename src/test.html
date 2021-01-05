@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div id="nodeGroupContainer">
+        <div class="NodeContainer" id="replicateKeyGroupButton" bis_skin_checked="1" style="left: 50px; top: 200px;">
+            <header>Client/Data Source</header>
+            <ul>
+                <li class="Output Active"><i>&nbsp;</i><span>Input Data</span></li>
+            </ul>
+            <button>add keyGroup</button>
+        </div>
+        <div class="NodeContainer" id="replicateKeyGroupButton" bis_skin_checked="1" style="left: 50px; top: 200px;">
+            <header>Client/Data Source2</header>
+            <ul>
+                <li class="Output Active"><i>&nbsp;</i><span>Input Data2</span></li>
+            </ul>
+            <button>add keyGroup</button>
+        </div>
+    </div>
+
+    <script>
+        var nodesArr = [];
+        var nodes = document.getElementById("nodeGroupContainer").getElementsByClassName("NodeContainer");
+
+        for (let i = 0; i <= nodes.length - 1; i++) {
+            var node = nodes[i];
+            var nodeObj = {};
+            nodeObj.Header = node.getElementsByTagName('header')[0].textContent;
+            nodeObj.inputData = [];
+            nodeObj.inputData.push(node.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].val);
+            nodesArr.push(nodeObj);
+        }
+        console.log(nodesArr);
+    </script>
+
+</body>
+
+</html>
