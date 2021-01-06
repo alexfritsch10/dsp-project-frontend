@@ -18,7 +18,7 @@ function App() {
           </button> 
 
           <div class="dropdown-content"> 
-            <img src={example} class="App-example" alt="example-IaC"/>
+            <img src={example} className="App-example" alt="example-IaC"/>
           </div> 
         </div>
 
