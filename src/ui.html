@@ -3,6 +3,8 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="NEditor.css">
 	<script src="NEditor.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 	<script>
 		window.addEventListener("load", function (e) {
 
@@ -23,6 +25,34 @@
 				else {
 					alert("There are some error on finding client node, please try again!")
 				}
+			})
+
+			var t = document.createTextNode("DEPLOY");
+			var deployButton = document.createElement("BUTTON");
+			deployButton.appendChild(t);
+			document.body.appendChild(deployButton);
+			deployButton.id = "deployButton";
+
+
+			document.getElementById("deployButton").addEventListener("click", function () {
+
+				fetch('data.json')
+						.then( r => r.text() )
+						.then (function (data){
+							var mydata = JSON.parse(data);
+							console.log( "JSON Data: " + mydata['FReDTemplateFormatVersion'] )
+							mydata['FReDTemplateFormatVersion']='changed value'
+							//used to change the values of json file
+							console.log( "after change, JSON Data: " + mydata['FReDTemplateFormatVersion'] )
+						})
+						// .then( t => console.log(t) )
+				// var mydata = JSON.parse(data);
+
+				// $.getJSON( "data.json", function(json) {
+				// 			console.log( "JSON Data: " + json.toString() );
+				// 		})
+				// var mydata = JSON.parse(json);
+				// $(".deployButton").html(mydata);
 			})
 		});
 
