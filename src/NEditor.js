@@ -343,14 +343,14 @@ NEditor.Node.prototype.addChild = function (type, text, id) {
 
 var op_replicaKey = function replicateKeyGroupSet(keyGroupId, kgx, kgy, rnx, rny, rn1x, rn1y, rn2x, rn2y, clientNode) {
 	var n4 = new NEditor.Node("Root Replica Node");
-	document.getElementById("newNodeContainer").id = keyGroupId+"RootReplica"
+	document.getElementById("newNodeContainer").id = keyGroupId + "RootReplica"
 	var n4i1 = n4.addInput("Node Name: \"nodeA\"");
 	var n4i2 = n4.addInput("Root Address:\"172.26.1.1:9001\"");
 	n4.setPosition(rnx, rny);
 	n4.Title
 
-	var n3 = new NEditor.Node("Key Group "+keyGroupId);
-	document.getElementById("newNodeContainer").id = keyGroupId+"KeyGroup"
+	var n3 = new NEditor.Node("Key Group " + keyGroupId);
+	document.getElementById("newNodeContainer").id = keyGroupId + "KeyGroup"
 	var n3i1 = n3.addInput("Name (configurable)");
 	var n3o1 = n3.addOutput("Mutable (configurable)");
 	var n3o1 = n3.addOutput("Expire (configurable)");
@@ -358,13 +358,13 @@ var op_replicaKey = function replicateKeyGroupSet(keyGroupId, kgx, kgy, rnx, rny
 	n3.setWidth(250);
 
 	var n5 = new NEditor.Node("Replica Node 1");
-	document.getElementById("newNodeContainer").id = keyGroupId+"ReplicaNode1"
+	document.getElementById("newNodeContainer").id = keyGroupId + "ReplicaNode1"
 	var n5i1 = n5.addInput("Node Name: \"nodeB\"");
 	var n5o1 = n5.addInput("Expire (this should be configurable)");
 	n5.setPosition(rn1x, rn1y);
 
 	var n2 = new NEditor.Node("Replica Node 2");
-	document.getElementById("newNodeContainer").id = keyGroupId+"ReplicaNode2"
+	document.getElementById("newNodeContainer").id = keyGroupId + "ReplicaNode2"
 	var n2i1 = n2.addInput("Node Name: \"nodeC\"");
 	var n2o1 = n2.addInput("Expire (this should be configurable)");
 	n2.setPosition(rn2x, rn2y);
@@ -407,7 +407,6 @@ NEditor.Node.prototype.setWidth = function (w) { this.eRoot.style.width = w + "p
 window.addEventListener("load", function (e) {
 	NEditor.init();
 });
-//MY SAME EXPERIMENT 
-document.write(op_replicaKey.n4);
+//MY SAME EXPERIMENT
 
 //OVER
