@@ -31,6 +31,9 @@ function App() {
               } else {
                 document.getElementById('UploadForm').style.display = 'none';
               }
+              if(document.getElementById('CliInstruction').style.display === 'block') {
+                document.getElementById('CliInstruction').style.display = 'none';
+              }
               
             }}>
               Upload
@@ -46,6 +49,9 @@ function App() {
                 document.getElementById('CliInstruction').style.display = 'block';
               } else {
                 document.getElementById('CliInstruction').style.display = 'none';
+              }
+              if(document.getElementById('UploadForm').style.display === 'block') {
+                document.getElementById('UploadForm').style.display = 'none';
               }
               
             }}>
@@ -76,5 +82,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
