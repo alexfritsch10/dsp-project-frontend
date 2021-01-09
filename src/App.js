@@ -2,6 +2,7 @@ import iot from './EdgeFog.png';
 import example from './ExampleSchema.png'
 import './App.css';
 import UploadForm from './UploadForm';
+import CliInstruction from './CliInstruction';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
@@ -21,12 +22,16 @@ function App() {
       <header className="App-header">
         <img src={iot} className="App-logo" alt="logo" />
         <p>
-          Welcome to the DSP Frontend!
+          Welcome to the DSP!
         </p>
         <div className="tableOfContent">
-            <button className="dropbtn"onClick={(e) => {
-              e.preventDefault();
-              window.location.href='#scollTo';
+            <button className="dropbtn" onClick= {() => {
+              if(document.getElementById('UploadForm').style.display === 'none') {
+                document.getElementById('UploadForm').style.display = 'block';
+              } else {
+                document.getElementById('UploadForm').style.display = 'none';
+              }
+              
             }}>
               Upload
             </button>
@@ -36,13 +41,16 @@ function App() {
             }}>
               GUI
             </button>
-            <button className="dropbtn">
+            <button className="dropbtn" onClick= {() => {
+              if(document.getElementById('CliInstruction').style.display === 'none') {
+                document.getElementById('CliInstruction').style.display = 'block';
+              } else {
+                document.getElementById('CliInstruction').style.display = 'none';
+              }
+              
+            }}>
               CLI
             </button>
-
-          <div className="dropdown-content">
-            <img src={example} className="App-example" alt="example-IaC"/>
-          </div>
         </div>
 
         <div class="dropdown">
@@ -54,29 +62,15 @@ function App() {
             <img src={example} className="App-example" alt="example-IaC"/>
           </div> 
         </div>
-        <br/>
-        <br id={"scollTo"}/>
 
-        <UploadForm />
-
-        <div id = "instruction">
-          <h3>
-            Mercury CLI Instruction
-          </h3>
-          <p> 
-            Clone the repository from this <a href="https://github.com/alexfritsch10/dsp-cli" target="_blank" rel="noreferrer">Github Link</a>.
-            <br/>
-            Change to the new folder with 'cd dsp-cli'. 
-            <br/>
-            Execute the command 'pip3 install .', to add the new CLI tool to the library of your existing CLI tools.
-            <br/>
-            Go to the folder where the JSON file to be uploaded is located.
-            <br/> 
-            Then run 'mercury deploy $fileName', where the fileName is the name of the JSON file or the file path.
-            <br/>
-            If the JSON file is correctly formatted, the infrastructure gets immediately deployed on FReD and tinyFaaS.
-            </p>
-        </div>
+        <div id={"UploadForm"} style={{display: 'none'}}>
+          <UploadForm />
+        </div>   
+          
+        <div id={"CliInstruction"} style={{display: 'none'}}>
+          <CliInstruction />
+        </div>    
+        
 
       </header>
     </div>
