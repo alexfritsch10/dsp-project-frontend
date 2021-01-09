@@ -1,3 +1,16 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
 .App {
   text-align: center;
 }
@@ -25,14 +38,26 @@
   color: rgb(0, 0, 0);
 }
 
+
+.tableOfContent > .dropbtn {
+  background-color: Gray;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border: 15px;
+  cursor: pointer;
+  margin: 20px;
+  width: 100px;
+}
+
 .dropbtn { 
   background-color: #299ACC; 
-  color: white; 
+  color: white;
   padding: 16px; 
   font-size: 16px; 
   border: none; 
-  cursor: pointer; 
-} 
+  cursor: pointer;
+}
 
 .dropdown { 
   position: relative; 
@@ -59,4 +84,14 @@
 
 .dropdown:hover .dropbtn { 
   background-color: #989898; 
-} 
+}
+
+.dropbtn:hover {
+  background-color: #299ACC;
+  font-weight: bold;
+}
+
+#uploadFormContainer {
+  position: relative;
+  button: 20px;
+}
