@@ -6,6 +6,7 @@
 			window.addEventListener("load",function(e){
 
 
+
 				var n1 = new NEditor.Node("Client/Data Source");
 				var n1o1 = n1.addOutput("Input Data");
 				n1.addChild("BUTTON","add keyGroup","replicateKeyGroupButton");
@@ -30,7 +31,17 @@
 <body>
 
 <svg id="connsvg"></svg>
-
+<div class="tableOfContent">
+	<button class="tableOfContentButton" onclick="window.location.href='http://localhost:3000/';">
+		Upload
+	</button>
+	<button class="tableOfContentButton" id="GUI">
+		GUI
+	</button>
+	<button class="tableOfContentButton">
+		CLI
+	</button>
+</div>
 <p style="color:#a0a0a0; bottom:1px; position:absolute">
 	- TODO:<br>
 	- enable create new key group sets by click on icon - Xin <br>
