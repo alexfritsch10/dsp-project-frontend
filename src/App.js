@@ -4,17 +4,6 @@ import './App.css';
 import UploadForm from './UploadForm';
 import CliInstruction from './CliInstruction';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-
-// function hideUploadForm() {
-//   document.getElementById('uploadFormContainer').style.display = ""
-// }
 
 function App() {
   return (
@@ -60,11 +49,17 @@ function App() {
         </div>
 
         <div class="dropdown">
-          <button class="dropbtn"> 
+          <button class="dropbtn" onClick= {() => {
+              if(document.getElementById('ExIaC').style.display === 'none') {
+                document.getElementById('ExIaC').style.display = 'block';
+              } else {
+                document.getElementById('ExIaC').style.display = 'none';
+              }
+          }}> 
             Here is an example FReD IaC Input
           </button> 
 
-          <div class="dropdown-content"> 
+          <div id={"ExIaC"} class="dropdown-content" style={{display: 'none'}}> 
             <img src={example} className="App-example" alt="example-IaC"/>
           </div> 
         </div>
@@ -72,7 +67,7 @@ function App() {
         <div id={"UploadForm"} style={{display: 'none'}}>
           <UploadForm />
         </div>   
-          
+
         <div id={"CliInstruction"} style={{display: 'none'}}>
           <CliInstruction />
         </div>    

@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import { Checkmark } from 'react-checkmark';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 class UploadForm extends Component {
 
@@ -9,15 +10,21 @@ class UploadForm extends Component {
         selectedFile: null,
         apiResponseStatus: null,
         apiResponseMessage: null,
+        noFileSelectedError: null
     };
 
     // On file select (from the pop up)
     onFileChange = event => {
         this.setState({ selectedFile: event.target.files[0] });
+        this.setState({ noFileSelectedError: null });
     };
 
     // On file upload (click the upload button)
     onFileUpload = () => {
+        if(!this.state.selectedFile) {
+            this.setState({ noFileSelectedError: 'No file is selected!' });
+            return
+        }
         const reader = new FileReader();
         reader.onload = async (file) => {
             const text = (file.target.result);
@@ -75,6 +82,14 @@ class UploadForm extends Component {
                     <h2>Deployment Information:</h2>
                     <p>Status: {this.state.apiResponseStatus}</p>
                     <p>Message: {this.state.apiResponseMessage}</p>
+                    <HighlightOffIcon color='secondary' fontSize='large'/>
+
+                </div>
+            );
+        } else if(this.state.noFileSelectedError) {
+            return (
+                <div>
+                    <p>Error: {this.state.noFileSelectedError}</p>
                 </div>
             );
         }

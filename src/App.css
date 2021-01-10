@@ -33,7 +33,7 @@ code {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: 50px;
+  margin: 0 50px 50px 50px;
   font-size: calc(10px + 2vmin);
   color: rgb(0, 0, 0);
 }
@@ -64,8 +64,7 @@ code {
   display: inline-block; 
 } 
 
-.dropdown-content { 
-  display: none; 
+.dropdown-content {  
   position: absolute; 
   background-color: #f9f9f9; 
   min-width: 160px; 
@@ -74,21 +73,12 @@ code {
   z-index: 1; 
 }
 
-.dropdown-content a:hover { 
-  background-color: #f1f1f1 
-} 
-
-.dropdown:hover .dropdown-content { 
-  display: block; 
-} 
-
 .dropdown:hover .dropbtn { 
   background-color: #989898; 
 }
 
 .dropbtn:hover {
   background-color: #299ACC;
-  font-weight: bold;
 }
 
 #uploadFormContainer {
