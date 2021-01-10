@@ -1,76 +1,95 @@
 import React,{Component} from 'react';
-import { validateJSONSchema } from './validateJSONSchema';
+import axios from 'axios';
+import { Checkmark } from 'react-checkmark';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 class UploadForm extends Component {
-
 
     state = {
         // Initially, no file is selected
         selectedFile: null,
-        schemaValid: null,
-        schemaMessage: null,
-        display: 'block',
+        apiResponseStatus: null,
+        apiResponseMessage: null,
+        noFileSelectedError: null
     };
 
     // On file select (from the pop up)
     onFileChange = event => {
-
-        // Update the state
         this.setState({ selectedFile: event.target.files[0] });
-
+        this.setState({ noFileSelectedError: null });
     };
-
-    handleShow = (e) => {
-        if(this.state.display=="content") {this.setState({ display: 'none' });}
-        else  {this.setState({ display: 'content' });}
-    };
-
 
     // On file upload (click the upload button)
     onFileUpload = () => {
-
+        if(!this.state.selectedFile) {
+            this.setState({ noFileSelectedError: 'No file is selected!' });
+            return
+        }
         const reader = new FileReader();
         reader.onload = async (file) => {
             const text = (file.target.result);
-            const validity = validateJSONSchema(text);
-            console.log(validity.valid);
-            console.log(validity.message);
-            this.setState({ schemaValid: validity.valid });
-            this.setState({ schemaMessage: validity.message });
-
+            this.sendDataToAPI(text);
         };
         reader.readAsText(this.state.selectedFile);
-
-
-        // Request made to the backend api
-        // Send formData object
-        // axios.post("api/uploadfile", formData);
     };
 
+    sendDataToAPI = (file) => {
+        axios.post("http://localhost:80", file, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+          .then((response) => {
+              console.log(response);
+              this.setState({ apiResponseStatus: response.data.Status});
+              console.log(this.state.apiResponseStatus);
+              console.log(typeof this.state.apiResponseStatus);
+              this.setState({ apiResponseMessage: response.data.Message});
+          })
+          .catch((error) => {
+              this.setState({ apiResponseStatus: '400'});
+              this.setState({ apiResponseMessage: 'Deployment was unsuccessful!'});
+              if (error.response) {
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+              } else if (error.request) {
+                  console.log(error.request);
+              } else {
+                  console.log('Error', error.message);
+              }
+              console.log(error.config);
+          });
+    }
 
-    // File content to be displayed after
-    // file upload is complete
+    // file data to be displayed after file upload is complete
     fileData = () => {
 
-        if (this.state.selectedFile && !this.state.schemaMessage) {
-
+        // schema was validated and could be processed by API 
+        if(this.state.apiResponseStatus && this.state.apiResponseStatus === '200') {
             return (
                 <div>
-                    <h2>File Details:</h2>
-                    <p>File Name: {this.state.selectedFile.name}</p>
-                    <p>File Type: {this.state.selectedFile.type}</p>
-                    <p>
-                        Last Modified:{" "}
-                        {this.state.selectedFile.lastModifiedDate.toDateString()}
-                    </p>
+                    <h2>Deployment Information:</h2>
+                    <p>Status: {this.state.apiResponseStatus}</p>
+                    <p>Message: {this.state.apiResponseMessage}</p>
+                    <Checkmark size='large' color='green'/>
                 </div>
             );
-        } else if(this.state.schemaMessage) {
+        // schema was either not valid or could not be processed by the API
+        } else if(this.state.apiResponseStatus) {
             return (
                 <div>
-                    <h2>Schema Details:</h2>
-                    <p>Schema Valid: {this.state.schemaValid.toString()}</p>
-                    <p>Message: {this.state.schemaMessage}</p>
+                    <h2>Deployment Information:</h2>
+                    <p>Status: {this.state.apiResponseStatus}</p>
+                    <p>Message: {this.state.apiResponseMessage}</p>
+                    <HighlightOffIcon color='secondary' fontSize='large'/>
+
+                </div>
+            );
+        } else if(this.state.noFileSelectedError) {
+            return (
+                <div>
+                    <p>Error: {this.state.noFileSelectedError}</p>
                 </div>
             );
         }
@@ -78,11 +97,7 @@ class UploadForm extends Component {
 
     render() {
         return (
-            <div id={"uploadFormContainer"}>
-                <button className="dropbtn" id={"uploadButton"} onClick={this.handleShow}>
-                    Click here to upload json file
-                </button>
-                <div id={"test"} style={{display: this.state.display}}>
+            <div>
                 <h3>
                     Upload JSON File to deploy Fog infrastructure!
                 </h3>
@@ -91,7 +106,6 @@ class UploadForm extends Component {
                     <button onClick={this.onFileUpload}>
                         Upload!
                     </button>
-                </div>
                 </div>
                 {this.fileData()}
             </div>
