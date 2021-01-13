@@ -29,7 +29,37 @@
 		</script>
 	</head>
 <body>
+<div class="submitButtonContainer">
+	<button id="deployButton" class="submitButtons">DEPLOY</button>
+	<button id="resetButton" class="submitButtons">RESET</button>
+</div>
+<script>
+	document.getElementById("resetButton").addEventListener("click", function(){
+		window.location.reload();
+	})
+	document.getElementById("deployButton").addEventListener("click", function () {
 
+		fetch('dataTemplate.json')
+				.then( r => r.text() )
+				.then (function (data){
+					var mydata = JSON.parse(data)
+					console.log( "JSON Template: " + JSON.stringify(mydata) )
+					var keygroupName = document.getElementById("Key Group 1Name").value
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Name']=keygroupName
+					var keygroupMutable = Boolean(document.getElementById("Key Group 1Mutable").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Mutable']=keygroupMutable
+					var keygroupExpiry = Number(document.getElementById("Key Group 1ExpireAt").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Expiry']=keygroupExpiry
+					var replica1Expiry = Number(document.getElementById("Key Group 1Replica1ExpireAt").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][0]['Expiry']=replica1Expiry
+					var replica2Expiry = Number(document.getElementById("Key Group 2Replica1ExpireAt").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][1]['Expiry']=replica2Expiry
+					console.log( "JSON Customized Data: " + JSON.stringify(mydata))
+					//used to change the values of json file
+					// console.log(mydata)
+				})
+	})
+</script>
 <svg id="connsvg"></svg>
 <div class="tableOfContent">
 	<button class="tableOfContentButton" onclick="window.location.href='http://localhost:3000/';">
@@ -43,12 +73,15 @@
 	</button>
 </div>
 <p style="color:#a0a0a0; bottom:1px; position:absolute">
-	- TODO:<br>
-	- enable create new key group sets by click on icon - Xin <br>
-	- set default values - Xin <br>
-	- implement configurable fields - Amit <br>
-	- convert GUI to json file - Amit <br>
-
+	- DONE:<br/>
+	- enable create new key group sets by click on icon <br/>
+	- set default values & configurable fields <br/>
+	- convert GUI to json file <br/>
+	<br/>
+	- TODO:<br/>
+	- send json to BE api<br/>
+	- enable deploy of multiple keygroups at one time<br/>
+	- enable delete key group<br/>
 	<br><br>&copy; 2020 Mercury;
 </p>
 

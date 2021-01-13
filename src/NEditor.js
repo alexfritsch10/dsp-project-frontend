@@ -174,7 +174,7 @@ NEditor.onInputClick = function(e){
 // Connector Object
 //###########################################################################
 
-NEditor.Connector = function(pElm,isInput,name){
+NEditor.Connector = function(pElm,isInput,name,valueName,configurable=false){
 	this.name   = name;
 	this.root   = document.createElement("li");
 	this.dot    = document.createElement("i");
@@ -188,6 +188,14 @@ NEditor.Connector = function(pElm,isInput,name){
 	pElm.appendChild(this.root);
 	this.root.appendChild(this.dot);
 	this.root.appendChild(this.label);
+	if (configurable) {
+		this.value  = document.createElement("input");
+		this.value.setAttribute("id", valueName);
+		this.value.setAttribute("class", "configurable");
+		this.value.setAttribute("type", "text");
+		this.label.appendChild(this.value);
+		this.root.appendChild(this.value);
+	}
 
 	//Define the Elements
 	this.root.className = (isInput)?"Input":"Output";
@@ -316,14 +324,14 @@ NEditor.Node = function(sTitle){
 };
 
 
-NEditor.Node.prototype.addInput = function(name){
-	var o = new NEditor.Connector(this.eList,true,name) ;
+NEditor.Node.prototype.addInput = function(name,valueId,configurable=false){
+	var o = new NEditor.Connector(this.eList,true,name,valueId,configurable) ;
 	this.Inputs.push(o);
 	return o;
 }
 
-NEditor.Node.prototype.addOutput = function(name){
-	var o = new NEditor.Connector(this.eList,false,name);
+NEditor.Node.prototype.addOutput = function(name,valueId,configurable=false){
+	var o = new NEditor.Connector(this.eList,false,name,valueId,configurable);
 	this.Outputs.push(o);
 	return o;
 }
@@ -342,25 +350,25 @@ NEditor.Node.prototype.addChild = function(type, text, id){
 
 function replicateKeyGroupSet(keyGroupId, kgx, kgy, rnx, rny, rn1x, rn1y, rn2x, rn2y, clientNode){
 	var n4 = new NEditor.Node("Root Replica Node");
-	var n4i1 = n4.addInput("Node Name: \"nodeA\"");
-	var n4i2 = n4.addInput("Root Address:\"172.26.1.1:9001\"");
+	var n4i1 = n4.addInput("Node Name: \"nodeA\"","nodeA");
+	var n4i2 = n4.addInput("Root Address:\"172.26.1.1:9001\"","nodeARootAddress");
 	n4.setPosition(rnx,rny);
 
 	var n3 = new NEditor.Node(keyGroupId);
-	var n3i1 = n3.addInput("Name (configurable)");
-	var n3o1 = n3.addOutput("Mutable (configurable)");
-	var n3o1 = n3.addOutput("Expire (configurable)");
+	var n3i1 = n3.addInput("Name: ", keyGroupId+"Name",true);
+	var n3o1 = n3.addOutput("Mutable: ", keyGroupId+"Mutable", true);
+	var n3o1 = n3.addOutput("Expire: ", keyGroupId+"ExpireAt", true);
 	n3.setPosition(kgx,kgy);
 	n3.setWidth(250);
 
 	var n5 = new NEditor.Node("Replica Node 1");
 	var n5i1 = n5.addInput("Node Name: \"nodeB\"");
-	var n5o1 = n5.addInput("Expire (this should be configurable)");
+	var n5o1 = n5.addInput("Expire: ", keyGroupId+"Replica1ExpireAt", true);
 	n5.setPosition(rn1x,rn1y);
 
-	var n2 = new NEditor.Node("Replica Node 3");
+	var n2 = new NEditor.Node("Replica Node 2");
 	var n2i1 = n2.addInput("Node Name: \"nodeC\"");
-	var n2o1 = n2.addInput("Expire (this should be configurable)");
+	var n2o1 = n2.addInput("Expire: ", keyGroupId+"Replica2ExpireAt", true);
 	n2.setPosition(rn2x,rn2y);
 
 
