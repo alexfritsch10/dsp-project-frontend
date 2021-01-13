@@ -80,8 +80,3 @@ code {
 .dropbtn:hover {
   background-color: #299ACC;
 }
-
-#uploadFormContainer {
-  position: relative;
-  button: 20px;
-}

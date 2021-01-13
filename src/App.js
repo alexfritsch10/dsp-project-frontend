@@ -1,11 +1,13 @@
-import iot from './EdgeFog.png';
-import example from './ExampleSchema.png'
+import iot from './images/EdgeFog.png';
+import example from './images/ExampleSchema.png'
 import './App.css';
 import UploadForm from './UploadForm';
 import CliInstruction from './CliInstruction';
 import React from 'react';
+import NodesDragDrop from './NodesDragDrop';
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +16,7 @@ function App() {
           Welcome to the DSP!
         </p>
         <div className="tableOfContent">
-            <button className="dropbtn" onClick= {() => {
+            <button className="dropbtn" onClick={() => {
               if(document.getElementById('UploadForm').style.display === 'none') {
                 document.getElementById('UploadForm').style.display = 'block';
               } else {
@@ -23,17 +25,28 @@ function App() {
               if(document.getElementById('CliInstruction').style.display === 'block') {
                 document.getElementById('CliInstruction').style.display = 'none';
               }
-              
+              if(document.getElementById('DragAndDrop').style.display === 'block') {
+                document.getElementById('DragAndDrop').style.display = 'none';
+              }
             }}>
               Upload
             </button>
-            <button className="dropbtn" id={"GUI"} onClick={(e) => {
-              e.preventDefault();
-              window.location.href='http://localhost:63342/dsp-project-frontend/src/ui.html?_ijt=fle0dghui7kt9m5oo13hguvdul';
+            <button className="dropbtn" id={"GUI"} onClick={() => {
+              if(document.getElementById('DragAndDrop').style.display === 'none') {
+                document.getElementById('DragAndDrop').style.display = 'block';
+              } else {
+                document.getElementById('DragAndDrop').style.display = 'none';
+              }
+              if(document.getElementById('UploadForm').style.display === 'block') {
+                document.getElementById('UploadForm').style.display = 'none';
+              }
+              if(document.getElementById('CliInstruction').style.display === 'block') {
+                document.getElementById('CliInstruction').style.display = 'none';
+              }
             }}>
               GUI
             </button>
-            <button className="dropbtn" onClick= {() => {
+            <button className="dropbtn" onClick={() => {
               if(document.getElementById('CliInstruction').style.display === 'none') {
                 document.getElementById('CliInstruction').style.display = 'block';
               } else {
@@ -42,14 +55,16 @@ function App() {
               if(document.getElementById('UploadForm').style.display === 'block') {
                 document.getElementById('UploadForm').style.display = 'none';
               }
-              
+              if(document.getElementById('DragAndDrop').style.display === 'block') {
+                document.getElementById('DragAndDrop').style.display = 'none';
+              }
             }}>
               CLI
             </button>
         </div>
 
-        <div class="dropdown">
-          <button class="dropbtn" onClick= {() => {
+        <div className="dropdown">
+          <button className="dropbtn" onClick= {() => {
               if(document.getElementById('ExIaC').style.display === 'none') {
                 document.getElementById('ExIaC').style.display = 'block';
               } else {
@@ -59,13 +74,17 @@ function App() {
             Here is an example FReD IaC Input
           </button> 
 
-          <div id={"ExIaC"} class="dropdown-content" style={{display: 'none'}}> 
+          <div id={"ExIaC"} className="dropdown-content" style={{display: 'none'}}> 
             <img src={example} className="App-example" alt="example-IaC"/>
           </div> 
         </div>
 
         <div id={"UploadForm"} style={{display: 'none'}}>
           <UploadForm />
+        </div>   
+        
+        <div id={"DragAndDrop"} style={{display: 'none'}}>
+          <NodesDragDrop keyGroupName='Juicer'/>
         </div>   
 
         <div id={"CliInstruction"} style={{display: 'none'}}>
