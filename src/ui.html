@@ -43,7 +43,7 @@
 				.then( r => r.text() )
 				.then (function (data){
 					var mydata = JSON.parse(data)
-					console.log( "JSON Template: " + JSON.stringify(mydata) )
+					// console.log( "JSON Template: " + JSON.stringify(mydata) )
 					var keygroupName = document.getElementById("Key Group 1Name").value
 					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Name']=keygroupName
 					var keygroupMutable = Boolean(document.getElementById("Key Group 1Mutable").value)
@@ -54,8 +54,7 @@
 					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][0]['Expiry']=replica1Expiry
 					var replica2Expiry = Number(document.getElementById("Key Group 2Replica1ExpireAt").value)
 					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][1]['Expiry']=replica2Expiry
-					console.log( "JSON Customized Data: " + JSON.stringify(mydata))
-					//used to change the values of json file
+					console.log( "Request Body: " + JSON.stringify(mydata))
 					// console.log(mydata)
 				})
 	})
