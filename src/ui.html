@@ -2,10 +2,9 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="NEditor.css">
 		<script src="NEditor.js"></script>
-		<script>
+		<script src="../node_modules/axios/dist/axios.min.js"></script>
+		<script type="module">
 			window.addEventListener("load",function(e){
-
-
 
 				var n1 = new NEditor.Node("Client/Data Source");
 				var n1o1 = n1.addOutput("Input Data");
@@ -39,6 +38,7 @@
 	})
 	document.getElementById("deployButton").addEventListener("click", function () {
 
+		// let requestBody;
 		fetch('dataTemplate.json')
 				.then( r => r.text() )
 				.then (function (data){
@@ -54,10 +54,53 @@
 					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][0]['Expiry']=replica1Expiry
 					var replica2Expiry = Number(document.getElementById("Key Group 2Replica1ExpireAt").value)
 					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][1]['Expiry']=replica2Expiry
-					console.log( "Request Body: " + JSON.stringify(mydata))
 					// console.log(mydata)
-				})
+					console.log(JSON.stringify(mydata))
+					sendDataToAPI(JSON.stringify(mydata));
+				});
+
+
+		// console.log(requestBody);
+		// let response = fetch ( 'http://localhost:80' ,{
+		// 	method: 'post',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: requestBody
+		// })
+		// console.log (response)
+
 	})
+
+
+			// .then (function (requestBody){
+			// 	try {
+			// 		var xhr = new XMLHttpRequest();
+			// 		console.log("Request Body: " + JSON.stringify(mydata));
+			// 		xhr.open("POST", "http://localhost:80", true);
+			// 		xhr.setRequestHeader('Content-Type', 'application/json');
+			// 		xhr.send(JSON.stringify(requestBody));
+			// 	}
+			// 	catch (e) {
+			// 		console.log(e);
+			// 		console.log("response"+e.response)
+			// 		console.log("request"+e.request)
+			// 		console.log("message"+e.message)
+			// 	}
+			// })
+	sendDataToAPI = (file) => {
+		axios.post("http://localhost:80", file, {
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((error) => {
+					console.log(error.config);
+				});
+	}
 </script>
 <svg id="connsvg"></svg>
 <div class="tableOfContent">

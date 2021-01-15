@@ -35,7 +35,7 @@ svg{position:absolute; z-index:-100; top:0px; left:0px; width:100%; height:100%;
 	background-size: 400%;
 	z-index: -1;
 	animation: glowing 20s linear infinite;
-	opacity: 0.85;
+	opacity: 0.5;
 	transition: opacity .3s ease-in-out;
 	border-radius: 10px;
 	color:white;
