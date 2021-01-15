@@ -13,7 +13,7 @@ function App() {
       <header className="App-header">
         <img src={iot} className="App-logo" alt="logo" />
         <p>
-          Welcome to the DSP!
+          Welcome to the FogStore!
         </p>
         <div className="tableOfContent">
             <button className="dropbtn" onClick={() => {

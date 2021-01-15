@@ -5,6 +5,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F7F9FA;
 }
 
 code {
@@ -27,7 +28,7 @@ code {
 
 
 .App-header {
-  background-color: #ffffff;
+  background-color: #F7F9FA;
   min-height: 100vh;
   display: flex;
   justify-content: center;
