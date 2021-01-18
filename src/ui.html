@@ -2,10 +2,9 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="NEditor.css">
 		<script src="NEditor.js"></script>
-		<script>
+		<script src="../node_modules/axios/dist/axios.min.js"></script>
+		<script type="module">
 			window.addEventListener("load",function(e){
-
-
 
 				var n1 = new NEditor.Node("Client/Data Source");
 				var n1o1 = n1.addOutput("Input Data");
@@ -29,7 +28,78 @@
 		</script>
 	</head>
 <body>
+<div class="submitButtonContainer">
+	<button id="deployButton" class="submitButtons">DEPLOY</button>
+	<button id="resetButton" class="submitButtons">RESET</button>
+</div>
+<script>
+	document.getElementById("resetButton").addEventListener("click", function(){
+		window.location.reload();
+	})
+	document.getElementById("deployButton").addEventListener("click", function () {
 
+		// let requestBody;
+		fetch('dataTemplate.json')
+				.then( r => r.text() )
+				.then (function (data){
+					var mydata = JSON.parse(data)
+					// console.log( "JSON Template: " + JSON.stringify(mydata) )
+					var keygroupName = document.getElementById("Key Group 1Name").value
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Name']=keygroupName
+					var keygroupMutable = Boolean(document.getElementById("Key Group 1Mutable").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Mutable']=keygroupMutable
+					var keygroupExpiry = Number(document.getElementById("Key Group 1ExpireAt").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Expiry']=keygroupExpiry
+					var replica1Expiry = Number(document.getElementById("Key Group 1Replica1ExpireAt").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][0]['Expiry']=replica1Expiry
+					var replica2Expiry = Number(document.getElementById("Key Group 1Replica2ExpireAt").value)
+					mydata['Resources'][0]['Properties']['KeyGroups'][0]['Replicas'][1]['Expiry']=replica2Expiry
+					// console.log(mydata)
+					console.log(JSON.stringify(mydata))
+					sendDataToAPI(JSON.stringify(mydata));
+				});
+		// console.log(requestBody);
+		// let response = fetch ( 'http://localhost:80' ,{
+		// 	method: 'post',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: requestBody
+		// })
+		// console.log (response)
+
+	})
+			// .then (function (requestBody){
+			// 	try {
+			// 		var xhr = new XMLHttpRequest();
+			// 		console.log("Request Body: " + JSON.stringify(mydata));
+			// 		xhr.open("POST", "http://localhost:80", true);
+			// 		xhr.setRequestHeader('Content-Type', 'application/json');
+			// 		xhr.send(JSON.stringify(requestBody));
+			// 	}
+			// 	catch (e) {
+			// 		console.log(e);
+			// 		console.log("response"+e.response)
+			// 		console.log("request"+e.request)
+			// 		console.log("message"+e.message)
+			// 	}
+			// })
+	sendDataToAPI = (file) => {
+		axios.post("http://localhost:80", file, {
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+				.then((response) => {
+					console.log(response);
+					alert(response.statusText);
+				})
+				.catch((error) => {
+					console.log(error.config);
+					alert(error);
+				});
+	}
+</script>
 <svg id="connsvg"></svg>
 <div class="tableOfContent">
 	<button class="tableOfContentButton" onclick="window.location.href='http://localhost:3000/';">
@@ -43,12 +113,15 @@
 	</button>
 </div>
 <p style="color:#a0a0a0; bottom:1px; position:absolute">
-	- TODO:<br>
-	- enable create new key group sets by click on icon - Xin <br>
-	- set default values - Xin <br>
-	- implement configurable fields - Amit <br>
-	- convert GUI to json file - Amit <br>
-
+	- DONE:<br/>
+	- enable create new key group sets by click on icon <br/>
+	- set default values & configurable fields <br/>
+	- convert GUI to json file <br/>
+	<br/>
+	- TODO:<br/>
+	- send json to BE api<br/>
+	- enable deploy of multiple keygroups at one time<br/>
+	- enable delete key group<br/>
 	<br><br>&copy; 2020 Mercury;
 </p>
 

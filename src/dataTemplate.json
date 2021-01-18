@@ -1,0 +1,50 @@
+{
+  "FReDTemplateFormatVersion":"2020-30-11",
+  "Resources":[
+    {
+
+    "Name":"myTemperatureFReD",
+      "Type":"FReD",
+      "Properties":{
+        "Nodes":{
+          "RootAddress":"172.26.1.1:9001",
+          "NodeNames": [
+            "nodeA",
+            "nodeB",
+            "nodeC"
+          ]
+        },
+        "Clients":[
+          {
+            "Name":"Client1",
+            "Certificate":"same for every node and client"
+          }
+        ],
+        "KeyGroups":[
+          {
+            "Name":"StoreParis",
+            "Mutable": false,
+            "Expiry": 100,
+            "Replicas":[
+              {
+                "Name": "nodeA",
+                "Expiry":1000
+              },
+              {
+                "Name":"nodeC",
+                "Expiry":0
+              }
+            ],
+            "Triggers":[
+              {
+                "Name": "temperatureFaaS",
+                "Type": "",
+                "ReceiverAddress": 1000
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
