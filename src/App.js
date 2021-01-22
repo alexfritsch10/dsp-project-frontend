@@ -3,6 +3,8 @@ import example from './ExampleSchema.png'
 import './App.css';
 import UploadForm from './UploadForm';
 import CliInstruction from './CliInstruction';
+import GUI from './GUI';
+import GUITest from './GUITest'
 import React from 'react';
 
 function App() {
@@ -23,13 +25,24 @@ function App() {
               if(document.getElementById('CliInstruction').style.display === 'block') {
                 document.getElementById('CliInstruction').style.display = 'none';
               }
-              
+              if(document.getElementById('GUI').style.display === 'block') {
+                document.getElementById('GUI').style.display = 'none';
+              }
             }}>
               Upload
             </button>
-            <button className="dropbtn" id={"GUI"} onClick={(e) => {
-              e.preventDefault();
-              window.location.href='http://localhost:63342/dsp-project-frontend/src/ui.html?_ijt=fle0dghui7kt9m5oo13hguvdul';
+            <button className="dropbtn" onClick={() => {
+              if(document.getElementById('GUI').style.display === 'none') {
+                document.getElementById('GUI').style.display = 'block';
+              } else {
+                document.getElementById('GUI').style.display = 'none';
+              }
+              if(document.getElementById('CliInstruction').style.display === 'block') {
+                document.getElementById('CliInstruction').style.display = 'none';
+              }
+              if(document.getElementById('UploadForm').style.display === 'block') {
+                document.getElementById('UploadForm').style.display = 'none';
+              }
             }}>
               GUI
             </button>
@@ -42,7 +55,9 @@ function App() {
               if(document.getElementById('UploadForm').style.display === 'block') {
                 document.getElementById('UploadForm').style.display = 'none';
               }
-              
+              if(document.getElementById('GUI').style.display === 'block') {
+                document.getElementById('GUI').style.display = 'none';
+              }
             }}>
               CLI
             </button>
@@ -67,6 +82,11 @@ function App() {
         <div id={"UploadForm"} style={{display: 'none'}}>
           <UploadForm />
         </div>   
+
+        <div id={"GUI"} className="gui" style={{display: 'none'}}>
+          <GUI />
+          <GUITest />
+        </div>
 
         <div id={"CliInstruction"} style={{display: 'none'}}>
           <CliInstruction />
