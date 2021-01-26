@@ -1,10 +1,9 @@
-import iot from './EdgeFog.png';
-import example from './ExampleSchema.png'
+import iot from './Images/EdgeFog.png';
+import example from './Images/ExampleSchema.png'
 import './App.css';
 import UploadForm from './UploadForm';
 import CliInstruction from './CliInstruction';
 import GUI from './GUI';
-import GUITest from './GUITest'
 import React from 'react';
 
 function App() {
@@ -63,8 +62,8 @@ function App() {
             </button>
         </div>
 
-        <div class="dropdown">
-          <button class="dropbtn" onClick= {() => {
+        <div className="dropdown">
+          <button className="dropbtn" onClick= {() => {
               if(document.getElementById('ExIaC').style.display === 'none') {
                 document.getElementById('ExIaC').style.display = 'block';
               } else {
@@ -74,7 +73,7 @@ function App() {
             Here is an example FReD IaC Input
           </button> 
 
-          <div id={"ExIaC"} class="dropdown-content" style={{display: 'none'}}> 
+          <div id={"ExIaC"} className="dropdown-content" style={{display: 'none'}}> 
             <img src={example} className="App-example" alt="example-IaC"/>
           </div> 
         </div>
@@ -85,13 +84,11 @@ function App() {
 
         <div id={"GUI"} className="gui" style={{display: 'none'}}>
           <GUI />
-          <GUITest />
         </div>
 
         <div id={"CliInstruction"} style={{display: 'none'}}>
           <CliInstruction />
         </div>    
-        
 
       </header>
     </div>

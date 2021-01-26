@@ -108,3 +108,15 @@ code {
   z-index: 4;
   font-size: 12px;
 }
+
+label {
+  display: block;
+  font-size: 12px;
+  text-align: left;
+}
+
+input {
+  display: block;
+  margin: 3px 0 5px 0;
+  border: 1px solid black
+}

@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import axios from 'axios';
 import { Checkmark } from 'react-checkmark';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import sendTemplateToAPI from './apiConnection';
 
 class UploadForm extends Component {
 
@@ -27,40 +27,16 @@ class UploadForm extends Component {
         }
         const reader = new FileReader();
         reader.onload = async (file) => {
-            const text = (file.target.result);
-            this.sendDataToAPI(text);
+            const template = (file.target.result);
+            sendTemplateToAPI(template, (status, message) => {
+                this.setState({ apiResponseStatus: status });
+                this.setState({ apiResponseMessage: message });
+            });            
         };
         reader.readAsText(this.state.selectedFile);
     };
 
-    sendDataToAPI = (file) => {
-        axios.post("http://localhost:80", file, {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
-          .then((response) => {
-              console.log(response);
-              this.setState({ apiResponseStatus: response.data.Status});
-              console.log(this.state.apiResponseStatus);
-              console.log(typeof this.state.apiResponseStatus);
-              this.setState({ apiResponseMessage: response.data.Message});
-          })
-          .catch((error) => {
-              this.setState({ apiResponseStatus: '400'});
-              this.setState({ apiResponseMessage: 'Deployment was unsuccessful!'});
-              if (error.response) {
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-              } else if (error.request) {
-                  console.log(error.request);
-              } else {
-                  console.log('Error', error.message);
-              }
-              console.log(error.config);
-          });
-    }
+    
 
     // file data to be displayed after file upload is complete
     fileData = () => {
