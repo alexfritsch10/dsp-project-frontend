@@ -1,0 +1,56 @@
+{
+   "FReDTemplateFormatVersion":"2020-30-11",
+   "Name":"myTemperatureFReD",
+   "Nodes":{
+      "RootAddress":"172.26.1.1:9001",
+      "NodeNames": [
+            "nodeA",
+            "nodeB",
+            "nodeC"
+            ]
+      },
+   "Triggers": [
+      {
+         "Id": "importantData",
+         "HostAddress": "172.26.5.1:9001"
+      }
+   ],
+   "Clients":[
+      {
+         "Name":"Client1",
+         "Certificate":"same for every node and client"
+      }
+   ],
+   "KeyGroups":[
+      {
+         "Name":"StoreBerlin",
+         "Mutable": false,
+         "Replicas":[
+            {
+               "Name": "nodeA",
+               "Expiry": 1000,
+               "Triggers": [
+                  {
+                        "TriggerId": "importantData",
+                        "CodeURL": "www.google.de"
+                  },
+                  {
+                        "TriggerId": "importantData",
+                        "CodeURL": "www.amazon.de"
+                  }
+               ]
+            },
+            {
+               "Name":"nodeC",
+               "Expiry": 1000,
+               "Triggers": [
+                  {
+                        "TriggerId": "importantData",
+                        "CodeURL": "www.amazon.de"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

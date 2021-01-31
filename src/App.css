@@ -83,5 +83,40 @@ code {
 
 #uploadFormContainer {
   position: relative;
-  button: 20px;
+}
+
+.save__controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 4;
+  font-size: 12px;
+}
+
+.gui {
+  width: 800px;
+  height: 800px;
+  border: 2px;
+  border-style: solid;
+  margin-top: 50px;
+}
+
+.updatenode__controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 4;
+  font-size: 12px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  text-align: left;
+}
+
+input {
+  display: block;
+  margin: 3px 0 5px 0;
+  border: 1px solid black
 }
