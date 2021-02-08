@@ -59,7 +59,7 @@ function getTriggersForReplica(replicaId, elements) {
     for (let trigger of triggers) {
         console.log(trigger);
         let triggerObject = {
-            "TriggerId": trigger.data.name,
+            "Name": trigger.data.name,
             "CodeURL": trigger.data.codeURL
         };
         triggersList.push(triggerObject);
