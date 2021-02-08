@@ -13,7 +13,7 @@ function sendTemplateToAPI(template, callback) {
         })
         .catch((error) => {
             console.log(error);
-            callback('400', 'Deployment was unsuccessful!');
+            callback('400', 'Check for API Connection!');
         });
 }
 

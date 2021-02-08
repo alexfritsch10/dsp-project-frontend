@@ -11,7 +11,7 @@
       },
    "Triggers": [
       {
-         "Id": "importantData",
+         "Name": "importantData",
          "HostAddress": "172.26.5.1:9001"
       }
    ],
@@ -31,11 +31,11 @@
                "Expiry": 1000,
                "Triggers": [
                   {
-                        "TriggerId": "importantData",
+                        "Name": "importantData",
                         "CodeURL": "www.google.de"
                   },
                   {
-                        "TriggerId": "importantData",
+                        "Name": "importantData",
                         "CodeURL": "www.amazon.de"
                   }
                ]
@@ -45,7 +45,7 @@
                "Expiry": 1000,
                "Triggers": [
                   {
-                        "TriggerId": "importantData",
+                        "Name": "importantData",
                         "CodeURL": "www.amazon.de"
                   }
                ]

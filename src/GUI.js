@@ -5,6 +5,8 @@ import KeygroupNode from './GUIElements/KeygroupNode';
 import ReplicaNode from './GUIElements/ReplicaNode';
 import TriggerNode from './GUIElements/TriggerNode';
 import integrateElementsIntoJSON from './processGUIGraph';
+import { Checkmark } from 'react-checkmark';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const nodeTypes = {
     keygroupNode: KeygroupNode,
@@ -19,11 +21,12 @@ const getRandomInt = (min, max, stringRequired = true) => {
         return returnVal.toString();
     }
     return returnVal;
-    
-}
+};
 
 const GUI = () => {
     const [elements, setElements] = useState([]);
+    const [apiMessage, setApiMessage] = useState('');
+    const [apiStatus, setApiStatus] = useState('');
     const onElementsRemove = (elementsToRemove) =>
         setElements((els) => removeElements(elementsToRemove, els));
     const onConnect = (params) => setElements((els) => addEdge(params, els));
@@ -48,7 +51,6 @@ const GUI = () => {
             })
         )
     };
-    
     const onAddKeygroup = useCallback(() => {
         const kgId = getRandomInt(0, 10000);
         const newKeygroup = {
@@ -115,9 +117,34 @@ const GUI = () => {
         };
         setElements((els) => els.concat(newKeygroup));  
     }, [setElements]);
-    
+    const DisplayApiResponse = () => {
+        if(apiStatus === '200') {
+            return (
+                <div>
+                    <h2>Deployment Information:</h2>
+                    <p>Status: {apiStatus}</p>
+                    <p>Message: {apiMessage}</p>
+                    <Checkmark size='large' color='green'/>
+                </div>
+            );
+        // schema was either not valid or could not be processed by the API
+        } else if(apiStatus !== '') {
+            return (
+                <div>
+                    <h2>Deployment Information:</h2>
+                    <p>Status: {apiStatus}</p>
+                    <p>Message: {apiMessage}</p>
+                    <HighlightOffIcon color='secondary' fontSize='large'/>
+                </div>
+            );
+        } else {
+            return null;
+        }
+    };
+
     return (
         <ReactFlowProvider>
+            <DisplayApiResponse />
             <ReactFlow
                 elements={elements}
                 nodeTypes={nodeTypes}
@@ -131,7 +158,12 @@ const GUI = () => {
                     <button onClick={onAddKeygroup}>add keygroup</button>
                     <button onClick={onAddReplica}>add replica</button>
                     <button onClick={onAddTrigger}>add trigger</button>
-                    <button onClick={() => {integrateElementsIntoJSON(elements, (status, message) => {console.log(status); console.log(message);})}}>deploy infrastructure</button>
+                    <button onClick={() => {
+                        integrateElementsIntoJSON(elements, (status, message) => {
+                            setApiStatus(status);
+                            setApiMessage(message);
+                        })
+                    }}>deploy infrastructure</button>
                 </div>
             </ReactFlow>
         </ReactFlowProvider>
