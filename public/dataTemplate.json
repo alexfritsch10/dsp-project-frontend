@@ -9,12 +9,6 @@
             "nodeC"
             ]
       },
-   "Triggers": [
-      {
-         "Name": "importantData",
-         "HostAddress": "172.26.5.1:9001"
-      }
-   ],
    "Clients":[
       {
          "Name":"Client1",
@@ -25,29 +19,29 @@
       {
          "Name":"StoreBerlin",
          "Mutable": false,
+
+         "Triggers": [
+            {
+            "Name": "importantData",
+            "HostAddress": "172.26.5.1:9001",
+            "CodeURL": "https://github.com/OpenFogStack/tinyFaas/archive/master.zip",
+            "subfolder_path": "tinyFaaS-master/examples/sieve-of-erasthostenes",
+            "threads": 1
+            }
+         ],
          "Replicas":[
             {
                "Name": "nodeA",
                "Expiry": 1000,
                "Triggers": [
-                  {
-                        "Name": "importantData",
-                        "CodeURL": "www.google.de"
-                  },
-                  {
-                        "Name": "importantData",
-                        "CodeURL": "www.amazon.de"
-                  }
+                  "importantData"
                ]
             },
             {
                "Name":"nodeC",
                "Expiry": 1000,
                "Triggers": [
-                  {
-                        "Name": "importantData",
-                        "CodeURL": "www.amazon.de"
-                  }
+                  "importantData"
                ]
             }
          ]

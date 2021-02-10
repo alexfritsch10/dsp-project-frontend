@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function sendTemplateToAPI(template, callback) {
 
-    axios.post("http://localhost:80", template, {
+    axios.post("http://localhost:8081", template, {
         headers: {
           'Content-Type': 'application/json',
         }
