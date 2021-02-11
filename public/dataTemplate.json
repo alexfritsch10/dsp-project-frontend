@@ -22,11 +22,11 @@
 
          "Triggers": [
             {
-            "Name": "importantData",
-            "HostAddress": "172.26.5.1:9001",
-            "CodeURL": "https://github.com/OpenFogStack/tinyFaas/archive/master.zip",
-            "subfolder_path": "tinyFaaS-master/examples/sieve-of-erasthostenes",
-            "threads": 1
+               "Name": "importantData",
+               "HostAddress": "172.26.5.1:9001",
+               "CodeURL": "https://github.com/OpenFogStack/tinyFaas/archive/master.zip",
+               "subfolder_path": "tinyFaaS-master/examples/sieve-of-erasthostenes",
+               "threads": 1
             }
          ],
          "Replicas":[
