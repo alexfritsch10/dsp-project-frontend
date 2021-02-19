@@ -17,15 +17,13 @@
    ],
    "KeyGroups":[
       {
-         "Name":"StoreBerlin",
-         "Mutable": false,
-
-         "Triggers": [
+         "Name":"sloppyData",
+         "Mutable": true,
+         "Functions": [
             {
-               "Name": "importantData",
-               "HostAddress": "172.26.5.1:9001",
-               "CodeURL": "https://github.com/OpenFogStack/tinyFaas/archive/master.zip",
-               "subfolder_path": "tinyFaaS-master/examples/sieve-of-erasthostenes",
+               "Name": "DataBoy",
+               "CodeURL": "https://github.com/alexfritsch10/dsp-tinyFaaS-examples/archive/main.zip",
+               "subfolder_path": "dsp-tinyFaaS-examples-main/returnRequest",
                "threads": 1
             }
          ],
@@ -33,16 +31,15 @@
             {
                "Name": "nodeA",
                "Expiry": 1000,
-               "Triggers": [
-                  "importantData"
+               "Functions": [
+                  "DataBoy"
                ]
-            },
+            }
+         ],
+         "DataItems": [
             {
-               "Name":"nodeC",
-               "Expiry": 1000,
-               "Triggers": [
-                  "importantData"
-               ]
+               "Key": "testKey1",
+               "Value": "testValue1,DataBoy"
             }
          ]
       }
