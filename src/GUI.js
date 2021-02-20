@@ -33,9 +33,10 @@ const GUI = () => {
     
     const onChange = (event) => {
         const formProps = event.target.id.split("_");
+        console.log("Going to update Name: " + formProps[1])
         // -> ["1453", "name"]
         let newValue = (formProps[1] === "mutable") ? event.target.checked : event.target.value;
-        if(formProps[1] === "expiry") {
+        if(formProps[1] === "expiry" || formProps[1] === "threads") {
             newValue = parseInt(newValue);
         }
         setElements((els) =>
@@ -52,7 +53,7 @@ const GUI = () => {
         )
     };
     const onAddKeygroup = useCallback(() => {
-        const kgId = getRandomInt(0, 10000);
+        const kgId = getRandomInt(0, 100000000);
         const newKeygroup = {
             id: kgId,
             type: 'keygroupNode',
@@ -74,7 +75,7 @@ const GUI = () => {
         setElements((els) => els.concat(newKeygroup));  
     }, [setElements]);
     const onAddReplica = useCallback(() => {
-        const repId = getRandomInt(0, 10000);
+        const repId = getRandomInt(0, 100000000);
         const newReplica = {
             id: repId,
             type: 'replicaNode',
@@ -96,7 +97,7 @@ const GUI = () => {
         setElements((els) => els.concat(newReplica));
     }, [setElements]);
     const onAddTrigger = useCallback(() => {
-        const triId = getRandomInt(0, 10000);
+        const triId = getRandomInt(0, 100000000);
         const newKeygroup = {
             id: triId,
             type: 'triggerNode',
@@ -104,7 +105,9 @@ const GUI = () => {
                 triId: triId,
                 onChange: onChange,
                 name: '',
-                codeURL: '' 
+                codeURL: '',
+                subfolderpath: '',
+                threads: ''
             },
             style: { 
                 border: '1px solid #777', 
@@ -157,7 +160,7 @@ const GUI = () => {
                 <div className="save__controls">
                     <button onClick={onAddKeygroup}>add keygroup</button>
                     <button onClick={onAddReplica}>add replica</button>
-                    <button onClick={onAddTrigger}>add trigger</button>
+                    <button onClick={onAddTrigger}>add function</button>
                     <button onClick={() => {
                         integrateElementsIntoJSON(elements, (status, message) => {
                             setApiStatus(status);

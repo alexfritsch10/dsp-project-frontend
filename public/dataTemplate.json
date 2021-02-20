@@ -8,40 +8,6 @@
             "nodeB",
             "nodeC"
             ]
-      },
-   "Clients":[
-      {
-         "Name":"Client1",
-         "Certificate":"same for every node and client"
-      }
-   ],
-   "KeyGroups":[
-      {
-         "Name":"sloppyData",
-         "Mutable": true,
-         "Functions": [
-            {
-               "Name": "DataBoy",
-               "CodeURL": "https://github.com/alexfritsch10/dsp-tinyFaaS-examples/archive/main.zip",
-               "subfolder_path": "dsp-tinyFaaS-examples-main/returnRequest",
-               "threads": 1
-            }
-         ],
-         "Replicas":[
-            {
-               "Name": "nodeA",
-               "Expiry": 1000,
-               "Functions": [
-                  "DataBoy"
-               ]
-            }
-         ],
-         "DataItems": [
-            {
-               "Key": "testKey1",
-               "Value": "testValue1,DataBoy"
-            }
-         ]
-      }
-   ]
+   },
+   "KeyGroups":[]
 }

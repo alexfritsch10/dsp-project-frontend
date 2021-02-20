@@ -12,7 +12,7 @@ export default memo(({ data }) => {
            <form>
                 <div>
                     <label htmlFor="triggerName">
-                        Trigger Name
+                        Function Name
                     </label>
                     <input 
                         id={data.triId + "_name"}
@@ -28,6 +28,28 @@ export default memo(({ data }) => {
                     <input 
                         id={data.triId + "_codeURL"}
                         name="codeURL" 
+                        type="text" 
+                        onChange={data.onChange} 
+                    />
+                </div>
+                <div>
+                    <label htmlFor="subfolderpath">
+                        Subfolder URL
+                    </label>
+                    <input 
+                        id={data.triId + "_subfolderpath"}
+                        name="subfolderpath" 
+                        type="text" 
+                        onChange={data.onChange} 
+                    />
+                </div>
+                <div>
+                    <label htmlFor="threads">
+                        Threads
+                    </label>
+                    <input 
+                        id={data.triId + "_threads"}
+                        name="threads" 
                         type="text" 
                         onChange={data.onChange} 
                     />
