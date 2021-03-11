@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Checkmark } from 'react-checkmark';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import sendTemplateToAPI from './apiConnection';
+import { sendTemplateToAPI } from './apiConnection';
 
 class UploadForm extends Component {
 

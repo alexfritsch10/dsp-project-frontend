@@ -5,6 +5,7 @@ import UploadForm from './UploadForm';
 import CliInstruction from './CliInstruction';
 import GUI from './GUI';
 import React from 'react';
+import MercuryInteraction from './MercuryInteraction';
 
 function App() {
   return (
@@ -60,6 +61,15 @@ function App() {
             }}>
               CLI
             </button>
+            <button className="dropbtn" onClick={() => {
+              if(document.getElementById('Interaction').style.display === 'none') {
+                document.getElementById('Interaction').style.display = 'block';
+              } else {
+                document.getElementById('Interaction').style.display = 'none';
+              }
+            }}>
+              Interaction
+            </button>
         </div>
 
         <div className="dropdown">
@@ -78,7 +88,7 @@ function App() {
           </div> 
         </div>
 
-        <div id={"UploadForm"} style={{display: 'none'}}>
+        <div id={"UploadForm"} style={{display: 'none'}} className="formUpload">
           <UploadForm />
         </div>   
 
@@ -86,10 +96,15 @@ function App() {
           <GUI />
         </div>
 
-        <div id={"CliInstruction"} style={{display: 'none'}}>
+        <div id={"CliInstruction"} style={{display: 'none'}} className="cliIn">
           <CliInstruction />
-        </div>    
-
+        </div> 
+          
+        <div id={"Interaction"} style={{display: 'none'}} className="cliIn">
+          <MercuryInteraction />
+        </div>
+        
+        
       </header>
     </div>
   );

@@ -22,7 +22,7 @@ code {
 
 .App-example {
   height: 800px;
-  width: 500px;
+  width: 650px;
 }
 
 
@@ -47,7 +47,7 @@ code {
   border: 15px;
   cursor: pointer;
   margin: 20px;
-  width: 100px;
+  width: 150px;
 }
 
 .dropbtn { 
@@ -120,3 +120,54 @@ input {
   margin: 3px 0 5px 0;
   border: 1px solid black
 }
+
+.command-line {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.formUpload {
+  margin-top: 20px;
+  border: 2px;
+  border-style: solid;
+  padding: 20px;
+}
+
+.cliIn {
+  text-align: left;
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px;
+  border-style: solid;
+  font-size: 18px;
+  max-width: 600px;
+}
+
+.cliIn li {
+  font-size: 22px;
+}
+
+command-label {
+  margin: 20px;
+}
+
+command-button {
+  width: 100%;
+  background-color: #299ACC;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+command-button:hover {
+  background-color: #0f85b8;
+}
+

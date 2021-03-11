@@ -1,4 +1,4 @@
-import sendTemplateToAPI from './apiConnection';
+import { sendTemplateToAPI } from './apiConnection';
 
 async function integrateElementsIntoJSON(elements, callback) {
     // console.log(elements);
