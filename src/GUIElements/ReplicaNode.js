@@ -34,12 +34,6 @@ export default memo(({ data }) => {
                     />
                 </div>
             </form>
-
-            <Handle 
-                type="source" 
-                position="right" 
-                id="b"
-            />
         </>
     );
 });
