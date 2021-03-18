@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
+
 .App {
   text-align: center;
 }
@@ -21,7 +22,7 @@ code {
 }
 
 .App-example {
-  height: 800px;
+  height: 700px;
   width: 650px;
 }
 
